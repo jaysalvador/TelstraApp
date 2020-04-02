@@ -8,6 +8,7 @@
 
 import UIKit
 import TelstraAPI
+import UICollectionViewLeftAlignedLayout
 
 enum ViewSection: Equatable {
     
@@ -23,13 +24,11 @@ class ViewController: JCollectionViewController<ViewSection, ViewItem> {
     
     private var viewModel: ViewModelProtocol?
     
-    private lazy var flowLayout: UICollectionViewFlowLayout = {
+    private lazy var flowLayout: UICollectionViewLeftAlignedLayout = {
         
-        let layout = UICollectionViewFlowLayout()
+        let layout = UICollectionViewLeftAlignedLayout()
         
         layout.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-        
-        layout.scrollDirection = .vertical
         
         return layout
     }()
@@ -46,7 +45,9 @@ class ViewController: JCollectionViewController<ViewSection, ViewItem> {
         
         collectionView.delegate = self
         
-        collectionView.backgroundColor = .gray
+        collectionView.backgroundColor = .white
+        
+        collectionView.clipsToBounds = false
         
         return collectionView
     }()

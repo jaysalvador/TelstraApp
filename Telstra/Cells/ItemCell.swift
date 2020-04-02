@@ -56,13 +56,16 @@ class ItemCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func prepare(content: Content?) -> UICollectionViewCell {
+    func prepare(content: Content?, onImageDownloaded: ImageDownloadedCallback? = nil) -> UICollectionViewCell {
         
         self.titleLabel.text = content?.title
         
         self.descriptionLabel.text = content?.description
         
-        self.imageView.setImage(content?.imageHref)
+        self.imageView.setImage(content?.imageHref) { image in
+            
+            onImageDownloaded?(image)
+        }
         
         self.layoutItems()
         
@@ -71,20 +74,57 @@ class ItemCell: UICollectionViewCell {
         return self
     }
     
-    class func size(givenWidth width: CGFloat, content: Content?) -> CGSize {
+    class func size(givenWidth: CGFloat, content: Content?) -> CGSize {
         
-        let _width = width > 414.0 ? width / 2 : width
+        var width = givenWidth > 414.0 ? givenWidth / 2 : givenWidth
         
-        return CGSize(width: _width, height: 350.0)
+        width -= 40.0
+        
+        var height: CGFloat = 20.0 + 8.0 + 8.0 + 200.0 + 20.0
+        
+        if let rect = content?.title?.boundingRect(
+            with: CGSize(
+                width: width - (40.0),
+                height: CGFloat.greatestFiniteMagnitude),
+            options: [
+                .usesLineFragmentOrigin,
+                .usesFontLeading,
+                .truncatesLastVisibleLine
+            ],
+            font: .circularBold(ofSize: 20.0)
+        ) {
+            
+            height += rect.height
+        }
+        
+        if let rect = content?.description?.boundingRect(
+            with: CGSize(
+                width: width - (40.0),
+                height: CGFloat.greatestFiniteMagnitude),
+            options: [
+                .usesLineFragmentOrigin,
+                .usesFontLeading,
+                .truncatesLastVisibleLine
+            ],
+            font: .circularBook(ofSize: 14.0)
+        ) {
+            
+            height += rect.height
+        }
+        
+        return CGSize(width: width, height: height)
     }
     
     private func layoutItems() {
         
         self.backgroundColor = .white
-        self.shadowColor = UIColor.black.withAlphaComponent(0.1)
-        self.shadowRadius = 10.0
-        self.shadowOffset = CGSize(width: 0, height: 1)
+        
         self.cornerRadius = 10.0
+
+        self.borderColor = UIColor.lightGray.withAlphaComponent(0.5)
+        self.borderWidth = 1.0
+        
+        self.clipsToBounds = false
 
         self.addSubview(self.titleLabel)
         self.addSubview(self.descriptionLabel)

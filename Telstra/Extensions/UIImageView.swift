@@ -9,9 +9,11 @@
 import UIKit
 import Kingfisher
 
+typealias ImageDownloadedCallback = ((UIImage?) -> Void)
+
 extension UIImageView {
     
-    func setImage(_ stringUrl: String?, clearCache: Bool? = false) {
+    func setImage(_ stringUrl: String?, clearCache: Bool? = false, onImageDownloaded: ImageDownloadedCallback? = nil) {
         
         self.image = nil
         
@@ -25,10 +27,10 @@ extension UIImageView {
             return
         }
         
-        self.setImage(url, clearCache: clearCache)
+        self.setImage(url, clearCache: clearCache, onImageDownloaded: onImageDownloaded)
     }
     
-    func setImage(_ url: URL?, clearCache: Bool? = false, indicatorType: IndicatorType? = .activity) {
+    func setImage(_ url: URL?, clearCache: Bool? = false, indicatorType: IndicatorType? = .activity, onImageDownloaded: ImageDownloadedCallback? = nil) {
         
         self.image = nil
         
@@ -50,7 +52,17 @@ extension UIImageView {
             with: ImageResource(downloadURL: url, cacheKey: url.absoluteString),
             placeholder: nil,
             options: nil,
-            progressBlock: nil) { [weak self] _ in
+            progressBlock: nil) { [weak self] (response) in
+                
+                switch response {
+                case .success(let result):
+                    
+                    onImageDownloaded?(result.image)
+                    
+                case .failure:
+                    
+                    onImageDownloaded?(nil)
+                }
                 
                 self?.contentMode = .scaleAspectFill
                 self?.setNeedsLayout()
