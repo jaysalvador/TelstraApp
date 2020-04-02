@@ -101,7 +101,14 @@ public class HttpClient: HttpClientProtocol {
                         
             if let httpUrlResponse = urlResponse as? HTTPURLResponse, httpUrlResponse.statusCode < 400 {
                 
-                if let data = data {
+                if var data = data {
+
+                    // Dataset given on the sample was formatted in ASCII.
+                    // Rightfully, since 2017, all data is required to be in at least UTF-8 (https://tools.ietf.org/html/rfc3629)
+                    if let string = String(data: data, encoding: .ascii) {
+                        
+                        data = string.data(using: .utf8) ?? data
+                    }
                     
                     do {
                         

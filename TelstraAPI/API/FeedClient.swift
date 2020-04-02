@@ -15,7 +15,7 @@ public protocol FeedClientProtocol {
 
 public class FeedClient: HttpClient, FeedClientProtocol {
     
-    func getFeed(onCompletion: HttpCompletionClosure<Feed>?) {
+    public func getFeed(onCompletion: HttpCompletionClosure<Feed>?) {
         
         self.request(
             Feed.self,
