@@ -237,6 +237,17 @@ class JCollectionViewController<Section: Equatable, Item: Equatable>: UIViewCont
         }
     }
     
+    /// Reload items at indexpath
+    /// - Parameter section: the current `Section` object
+    /// - Parameter item: the current `Item` object
+    func reload(atSection section: Section, item: Item) {
+        
+        if let indexPath = self.diffCalculator?.indexPath(forSection: section, value: item) {
+            
+            self.collectionView?.reloadItems(at: [indexPath])
+        }
+    }
+    
     // MARK: - Actions
     
     @objc

@@ -8,6 +8,7 @@
 
 import Foundation
 import TelstraAPI
+import UIKit
 
 typealias ViewModelCallback = (() -> Void)
 
@@ -17,6 +18,7 @@ protocol ViewModelProtocol {
     
     var title: String? { get }
     
+    var images: [String: UIImage] { get set }
     var contents: [Content]? { get }
     
     // MARK: - Callbacks
@@ -40,6 +42,8 @@ class ViewModel: ViewModelProtocol {
     
     var contents: [Content]?
     
+    var images: [String : UIImage]
+    
     // MARK: - Callbacks
     
     var onUpdated: ViewModelCallback?
@@ -56,6 +60,8 @@ class ViewModel: ViewModelProtocol {
     init(client _client: FeedClient?) {
         
         self.client = _client
+        
+        self.images = [String : UIImage]()
     }
     
     // MARK: - Functions
@@ -69,7 +75,15 @@ class ViewModel: ViewModelProtocol {
             
                 self?.title = feed.title
                 
-                self?.contents = feed.rows
+                self?.contents = feed.rows?.filter { return !$0.isNil }
+                
+                self?.contents?.forEach { [weak self] content in
+                
+                    if let id = content.id {
+                        
+                        self?.images[id] = nil
+                    }
+                }
                 
                 self?.onUpdated?()
                 

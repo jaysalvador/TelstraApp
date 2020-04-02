@@ -148,11 +148,24 @@ class ViewController: JCollectionViewController<ViewSection, ViewItem> {
     /// Renders all the items
     override func collectionView(_ collectionView: UICollectionView, cellForSection section: ViewSection, item: ViewItem, indexPath: IndexPath) -> UICollectionViewCell? {
         
-        if case .item(let content) = item {
+        if case .item(let content) = item, let id = content.id {
             
             if let cell = self.collectionView?.dequeueReusable(cell: ItemCell.self, for: indexPath) {
                 
-                return cell.prepare(content: content)
+                return cell.prepare(
+                    content: content,
+                    image: self.viewModel?.images[id]
+                ) { [weak self] image in
+                    
+                    guard image != nil else {
+                            
+                        return
+                    }
+
+                    self?.viewModel?.images[id] = image
+                    
+                    self?.reload(atSection: section, item: item)
+                }
             }
         }
         return nil
@@ -164,7 +177,18 @@ class ViewController: JCollectionViewController<ViewSection, ViewItem> {
         
         if case .item(let content) = item {
             
-            return ItemCell.size(givenWidth: collectionView.frame.width, content: content)
+            var imageSize: CGSize?
+            
+            if let id = content.id,
+                let image = self.viewModel?.images[id] {
+                
+                imageSize = image.size
+            }
+            
+            return ItemCell.size(
+                givenWidth: collectionView.frame.width,
+                imageSize: imageSize,
+                content: content)
         }
         
         return .zero

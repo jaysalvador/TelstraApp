@@ -39,16 +39,34 @@ class ItemCell: UICollectionViewCell {
         
         let image = UIImageView()
         
-        image.contentMode = .scaleAspectFill
+        image.contentMode = .scaleAspectFit
         image.clipsToBounds = true
         image.translatesAutoresizingMaskIntoConstraints = false
         
         return image
     }()
 
+    private var imageHeightAnchor: NSLayoutConstraint?
+
+    private var titleLabelTopAnchor: NSLayoutConstraint?
+    
     override init(frame: CGRect) {
         
         super.init(frame: frame)
+        
+        self.addSubview(self.titleLabel)
+        self.addSubview(self.descriptionLabel)
+        self.addSubview(self.imageView)
+        
+        self.backgroundColor = .white
+        
+        self.cornerRadius = 10.0
+        self.borderColor = UIColor.lightGray.withAlphaComponent(0.5)
+        self.borderWidth = 1.0
+        
+        self.clipsToBounds = false
+        
+        self.layoutItems()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -56,31 +74,51 @@ class ItemCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func prepare(content: Content?, onImageDownloaded: ImageDownloadedCallback? = nil) -> UICollectionViewCell {
+    func prepare(content: Content?, image: UIImage?, onImageDownloaded: ImageDownloadedCallback? = nil) -> UICollectionViewCell {
         
         self.titleLabel.text = content?.title
         
         self.descriptionLabel.text = content?.description
         
-        self.imageView.setImage(content?.imageHref) { image in
+        if let image = image {
             
-            onImageDownloaded?(image)
+            self.imageView.image = image
+        }
+        else {
+
+            self.imageView.setImage(content?.imageHref) { image in
+                
+                onImageDownloaded?(image)
+            }
         }
         
-        self.layoutItems()
+        self.imageView.contentMode = .scaleAspectFit
+        
+        let imageHeight = image?.size.height ?? 0.0
+        
+        let titleTopAnchor: CGFloat = imageHeight > 0 ? 8.0 : 0.0
+        
+        self.imageHeightAnchor?.constant = imageHeight
+        
+        self.titleLabelTopAnchor?.constant = titleTopAnchor
         
         self.layoutIfNeeded()
         
         return self
     }
     
-    class func size(givenWidth: CGFloat, content: Content?) -> CGSize {
+    class func size(
+        givenWidth: CGFloat,
+        imageSize: CGSize?,
+        content: Content?) -> CGSize {
         
         var width = givenWidth > 414.0 ? givenWidth / 2 : givenWidth
         
         width -= 40.0
         
-        var height: CGFloat = 20.0 + 8.0 + 8.0 + 200.0 + 20.0
+        let imageHeight = imageSize?.height ?? 0.0
+        
+        var height: CGFloat = 20.0 + 8.0 + 8.0 + imageHeight + 20.0
         
         if let rect = content?.title?.boundingRect(
             with: CGSize(
@@ -117,28 +155,21 @@ class ItemCell: UICollectionViewCell {
     
     private func layoutItems() {
         
-        self.backgroundColor = .white
+        self.imageHeightAnchor = self.imageView.heightAnchor.constraint(equalToConstant: 0)
         
-        self.cornerRadius = 10.0
-
-        self.borderColor = UIColor.lightGray.withAlphaComponent(0.5)
-        self.borderWidth = 1.0
+        self.titleLabelTopAnchor = self.titleLabel.topAnchor.constraint(equalTo: self.imageView.bottomAnchor, constant: 0)
         
-        self.clipsToBounds = false
-
-        self.addSubview(self.titleLabel)
-        self.addSubview(self.descriptionLabel)
-        self.addSubview(self.imageView)
+        self.imageHeightAnchor?.isActive = true
+        
+        self.titleLabelTopAnchor?.isActive = true
         
         NSLayoutConstraint.activate([
             self.imageView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 20),
             self.imageView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            self.imageView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            self.imageView.heightAnchor.constraint(equalToConstant: 200)
+            self.imageView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -20)
         ])
         
         NSLayoutConstraint.activate([
-            self.titleLabel.topAnchor.constraint(equalTo: self.imageView.bottomAnchor, constant: 8),
             self.titleLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             self.titleLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -20),
         ])
