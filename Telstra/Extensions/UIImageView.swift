@@ -66,7 +66,7 @@ extension UIImageView {
                     onImageDownloaded?(nil)
                 }
                 
-                self?.contentMode = .scaleAspectFill
+                self?.contentMode = .scaleAspectFit
                 self?.setNeedsLayout()
         }
     }
