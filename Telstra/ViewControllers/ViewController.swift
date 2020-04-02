@@ -8,7 +8,6 @@
 
 import UIKit
 import TelstraAPI
-import UICollectionViewLeftAlignedLayout
 import collection_view_layouts
 
 enum ViewSection: Equatable {
