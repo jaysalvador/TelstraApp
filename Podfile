@@ -8,7 +8,7 @@ target 'Telstra' do
   # Pods for Telstra
   pod 'Dwifft', :git => 'https://github.com/jflinter/Dwifft.git', :commit => 'c5a9c62'
   pod 'Kingfisher'
-  pod 'UICollectionViewLeftAlignedLayout'
+  pod 'collection-view-layouts/PinterestLayout'
 
   target 'TelstraTests' do
     inherit! :search_paths

@@ -9,6 +9,7 @@
 import UIKit
 import TelstraAPI
 import UICollectionViewLeftAlignedLayout
+import collection_view_layouts
 
 enum ViewSection: Equatable {
     
@@ -30,28 +31,32 @@ enum ViewItem: Equatable {
     }
 }
 
-class ViewController: JCollectionViewController<ViewSection, ViewItem> {
+class ViewController: JCollectionViewController<ViewSection, ViewItem>, LayoutDelegate {
     
     private var viewModel: ViewModelProtocol?
     
-    private lazy var flowLayout: UICollectionViewLeftAlignedLayout = {
+    private lazy var layout: PinterestLayout = {
         
-        let layout = UICollectionViewLeftAlignedLayout()
+        let layout = PinterestLayout()
         
-        layout.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        layout.delegate = self
         
-        layout.scrollDirection = .vertical
+        layout.cellsPadding = ItemsPadding(horizontal: 20, vertical: 20)
+        
+        layout.contentPadding = ItemsPadding(horizontal: 20, vertical: 20)
+        
+        layout.columnsCount = Int(self.columns)
         
         return layout
     }()
     
     private lazy var _collectionView: UICollectionView? = {
         
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.flowLayout)
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.layout)
         
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
-        collectionView.setCollectionViewLayout(self.flowLayout, animated: true)
+        collectionView.setCollectionViewLayout(self.layout, animated: true)
         
         collectionView.dataSource = self
         
@@ -68,7 +73,7 @@ class ViewController: JCollectionViewController<ViewSection, ViewItem> {
     
     private var columns: CGFloat {
         
-        if let width = self.collectionView?.frame.width {
+        if let width = self.view?.frame.width {
             
             return width >= 1024.0 ? 3 : (width > 414.0 ? 2 : 1)
         }
@@ -165,9 +170,6 @@ class ViewController: JCollectionViewController<ViewSection, ViewItem> {
         self.setupPullToRefresh()
         
         self.viewModel?.getContents()
-    }
-    
-    override func viewWillLayoutSubviews() {
         
         if let collectionView = self.collectionView {
             
@@ -178,6 +180,13 @@ class ViewController: JCollectionViewController<ViewSection, ViewItem> {
                 collectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
             ])
         }
+    }
+    
+    override func viewWillLayoutSubviews() {
+        
+        self.layout.columnsCount = Int(self.columns)
+        
+        self.layout.invalidateLayout()
     }
     
     // MARK: - UICollectionViewDataSource & UICollectionViewDelegate
@@ -245,6 +254,31 @@ class ViewController: JCollectionViewController<ViewSection, ViewItem> {
         self.updateSectionsAndItems(forced: true)
         
         self.viewModel?.getContents()
+    }
+    
+    // MARK: - LayoutDelegate
+    
+    func cellSize(indexPath: IndexPath) -> CGSize {
+        
+        if let collectionView = self.collectionView,
+            let (section, item) = self.sectionAndItem(atIndexPath: indexPath),
+            let size = self.collectionView(
+                collectionView,
+                layout: self.layout,
+                sizeForSection: section,
+                item: item,
+                indexPath: indexPath
+            ) {
+            
+            return size
+        }
+        
+        return .zero
+    }
+    
+    override func orientationChanged() {
+        
+        super.orientationChanged()
     }
 }
 

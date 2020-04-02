@@ -38,4 +38,9 @@ extension AbstractDiffCalculator where Section: Equatable, Value: Equatable {
 
         return nil
     }
+    
+    func sectionAndValue(atIndexPath indexPath: IndexPath) -> (Section, Value) {
+        
+        return (self.value(forSection: indexPath.section), self.value(atIndexPath: indexPath))
+    }
 }

@@ -248,6 +248,14 @@ class JCollectionViewController<Section: Equatable, Item: Equatable>: UIViewCont
         }
     }
     
+    
+    /// Returns `Section` and `Item`
+    /// - Parameter indexPath: given IndexPath
+    func sectionAndItem(atIndexPath indexPath: IndexPath) -> (Section, Item)? {
+        
+        return self.diffCalculator?.sectionAndValue(atIndexPath: indexPath)
+    }
+    
     // MARK: - Actions
     
     @objc
