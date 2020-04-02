@@ -18,6 +18,7 @@ class ItemCell: UICollectionViewCell {
         label.font = .circularBold(ofSize: 20)
         label.textColor = .black
         label.numberOfLines = 0
+        label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -30,6 +31,7 @@ class ItemCell: UICollectionViewCell {
         label.font = .circularBook(ofSize: 14)
         label.textColor = .darkGray
         label.numberOfLines = 0
+        label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -49,6 +51,8 @@ class ItemCell: UICollectionViewCell {
     private var imageHeightAnchor: NSLayoutConstraint?
 
     private var titleLabelTopAnchor: NSLayoutConstraint?
+
+    private var descriptionLabelTopAnchor: NSLayoutConstraint?
     
     override init(frame: CGRect) {
         
@@ -64,7 +68,7 @@ class ItemCell: UICollectionViewCell {
         self.borderColor = UIColor.lightGray.withAlphaComponent(0.5)
         self.borderWidth = 1.0
         
-        self.clipsToBounds = false
+        self.clipsToBounds = true
         
         self.layoutItems()
     }
@@ -75,6 +79,8 @@ class ItemCell: UICollectionViewCell {
     }
     
     func prepare(content: Content?, image: UIImage?, onImageDownloaded: ImageDownloadedCallback? = nil) -> UICollectionViewCell {
+        
+        self.imageView.image = nil
         
         self.titleLabel.text = content?.title
         
@@ -96,11 +102,15 @@ class ItemCell: UICollectionViewCell {
         
         let imageHeight = image?.size.height ?? 0.0
         
+        let scaledHeight = min(200.0, imageHeight)
+        
         let titleTopAnchor: CGFloat = imageHeight > 0 ? 8.0 : 0.0
         
-        self.imageHeightAnchor?.constant = imageHeight
+        self.imageHeightAnchor?.constant = scaledHeight
         
         self.titleLabelTopAnchor?.constant = titleTopAnchor
+        
+        self.descriptionLabelTopAnchor?.constant = content?.description != nil ? 8.0 : 0.0
         
         self.layoutIfNeeded()
         
@@ -110,15 +120,20 @@ class ItemCell: UICollectionViewCell {
     class func size(
         givenWidth: CGFloat,
         imageSize: CGSize?,
-        content: Content?) -> CGSize {
+        content: Content?,
+        columns: CGFloat = 1) -> CGSize {
         
-        var width = givenWidth > 414.0 ? givenWidth / 2 : givenWidth
+        var width = givenWidth / columns
         
         width -= 40.0
         
         let imageHeight = imageSize?.height ?? 0.0
         
-        var height: CGFloat = 20.0 + 8.0 + 8.0 + imageHeight + 20.0
+        let scaledHeight = min(200.0, imageHeight)
+        
+        let descriptionAnchor: CGFloat = content?.description != nil ? 8.0 : 0.0
+        
+        var height: CGFloat = 20.0 + 8.0 + descriptionAnchor + scaledHeight + 20.0
         
         if let rect = content?.title?.boundingRect(
             with: CGSize(
@@ -159,9 +174,13 @@ class ItemCell: UICollectionViewCell {
         
         self.titleLabelTopAnchor = self.titleLabel.topAnchor.constraint(equalTo: self.imageView.bottomAnchor, constant: 0)
         
+        self.descriptionLabelTopAnchor = self.descriptionLabel.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor, constant: 0)
+        
         self.imageHeightAnchor?.isActive = true
         
         self.titleLabelTopAnchor?.isActive = true
+        
+        self.descriptionLabelTopAnchor?.isActive = true
         
         NSLayoutConstraint.activate([
             self.imageView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 20),
@@ -175,7 +194,6 @@ class ItemCell: UICollectionViewCell {
         ])
         
         NSLayoutConstraint.activate([
-            self.descriptionLabel.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor, constant: 8),
             self.descriptionLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             self.descriptionLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -20)
         ])

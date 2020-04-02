@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "closure #1 in ViewController.collectionView(_:cellForSection:item:indexPath:):ViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "image!">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ItemCell.prepare(content:image:onImageDownloaded:):ItemCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "content?.imageHref">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

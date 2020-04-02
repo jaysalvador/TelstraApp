@@ -19,7 +19,7 @@ protocol ViewModelProtocol {
     var title: String? { get }
     
     var images: [String: UIImage] { get set }
-    var contents: [Content]? { get }
+    var contents: [Content]? { get set }
     
     // MARK: - Callbacks
     
@@ -67,6 +67,8 @@ class ViewModel: ViewModelProtocol {
     // MARK: - Functions
     
     func getContents() {
+        
+        self.images.removeAll()
         
         self.client?.getFeed { [weak self] response in
             

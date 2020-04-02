@@ -59,7 +59,9 @@ extension UIImageView {
                     
                     onImageDownloaded?(result.image)
                     
-                case .failure:
+                case .failure(let error):
+                    
+                    print(error)
                     
                     onImageDownloaded?(nil)
                 }

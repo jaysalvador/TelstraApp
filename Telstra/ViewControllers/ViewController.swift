@@ -18,6 +18,16 @@ enum ViewSection: Equatable {
 enum ViewItem: Equatable {
     
     case item(Content)
+    
+    static func == (lhs: ViewItem, rhs: ViewItem) -> Bool {
+        
+        switch (lhs, rhs) {
+            
+        case (.item(let lhsContent), .item(let rhsContent)):
+            
+            return lhsContent == rhsContent
+        }
+    }
 }
 
 class ViewController: JCollectionViewController<ViewSection, ViewItem> {
@@ -29,6 +39,8 @@ class ViewController: JCollectionViewController<ViewSection, ViewItem> {
         let layout = UICollectionViewLeftAlignedLayout()
         
         layout.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        
+        layout.scrollDirection = .vertical
         
         return layout
     }()
@@ -52,6 +64,17 @@ class ViewController: JCollectionViewController<ViewSection, ViewItem> {
         return collectionView
     }()
     
+    private var refreshControl = UIRefreshControl()
+    
+    private var columns: CGFloat {
+        
+        if let width = self.collectionView?.frame.width {
+            
+            return width >= 1024.0 ? 3 : (width > 414.0 ? 2 : 1)
+        }
+        return 1
+    }
+    
     // MARK: - Init
     
     required init?(coder aDecoder: NSCoder) {
@@ -74,6 +97,8 @@ class ViewController: JCollectionViewController<ViewSection, ViewItem> {
         self.viewModel = _viewModel
         
         self.setupViewModel()
+        
+        self.view.backgroundColor = .white
     }
     
     /// generates the items based on the data given by the `ViewModel` that will be rendered on the `CollectionView`
@@ -91,6 +116,16 @@ class ViewController: JCollectionViewController<ViewSection, ViewItem> {
     
     // MARK: - Setup
     
+    /// Pull-to-refresh
+    private func setupPullToRefresh() {
+        
+        self.refreshControl.attributedTitle = NSAttributedString(string: "")
+        
+        self.refreshControl.addTarget(self, action: #selector(onRefresh), for: UIControl.Event.valueChanged)
+        
+        self.collectionView?.refreshControl = self.refreshControl
+    }
+    
     /// setup the ViewModel callbacks and their behaviours
     private func setupViewModel() {
         
@@ -101,6 +136,8 @@ class ViewController: JCollectionViewController<ViewSection, ViewItem> {
                 self?.title = self?.viewModel?.title
                 
                 self?.updateSectionsAndItems()
+                
+                self?.refreshControl.endRefreshing()
             }
         }
     }
@@ -125,7 +162,7 @@ class ViewController: JCollectionViewController<ViewSection, ViewItem> {
         
         super.viewDidLoad()
         
-        self.view.backgroundColor = .white
+        self.setupPullToRefresh()
         
         self.viewModel?.getContents()
     }
@@ -164,7 +201,10 @@ class ViewController: JCollectionViewController<ViewSection, ViewItem> {
 
                     self?.viewModel?.images[id] = image
                     
-                    self?.reload(atSection: section, item: item)
+                    DispatchQueue.main.async {
+                        
+                        self?.reload(atSection: section, item: item)
+                    }
                 }
             }
         }
@@ -188,10 +228,23 @@ class ViewController: JCollectionViewController<ViewSection, ViewItem> {
             return ItemCell.size(
                 givenWidth: collectionView.frame.width,
                 imageSize: imageSize,
-                content: content)
+                content: content,
+                columns: self.columns)
         }
         
         return .zero
+    }
+    
+    // MARK: - Actions
+    
+    @objc
+    func onRefresh() {
+        
+        self.viewModel?.contents?.removeAll()
+        
+        self.updateSectionsAndItems(forced: true)
+        
+        self.viewModel?.getContents()
     }
 }
 

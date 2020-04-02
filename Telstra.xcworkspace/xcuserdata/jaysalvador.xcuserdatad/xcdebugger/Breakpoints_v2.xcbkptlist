@@ -39,15 +39,63 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "19D6406D-4B98-4B4F-B1BA-169AA1EA3246"
+            uuid = "5ED21BAF-97CE-4109-AD75-8CC6555D1A83"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Telstra/Cells/ItemCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "185"
+            endingLineNumber = "185"
+            landmarkName = "layoutItems()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C890A606-3C99-411E-AF4E-58366B23BF24"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Telstra/Cells/ItemCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
+            landmarkName = "init(frame:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "38EF4DB3-D8E9-4B9A-972B-B2D5319E61D3"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Telstra/ViewControllers/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "167"
-            endingLineNumber = "167"
+            startingLineNumber = "247"
+            endingLineNumber = "247"
+            landmarkName = "onRefresh()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BF3D15A7-A94A-4C89-B4A4-9E762A4E93BD"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Telstra/ViewControllers/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "206"
+            endingLineNumber = "206"
             landmarkName = "collectionView(_:cellForSection:item:indexPath:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -55,16 +103,96 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "5ED21BAF-97CE-4109-AD75-8CC6555D1A83"
+            uuid = "18E03D35-DEE2-4EB7-992B-50184A4C1ED9"
             shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Telstra/Classes/JCollectionViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "247"
+            endingLineNumber = "247"
+            landmarkName = "reload(atSection:item:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6E4FE81B-852B-46F5-ACE2-A7A985C43C05"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Telstra/Cells/ItemCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "166"
-            endingLineNumber = "166"
-            landmarkName = "layoutItems()"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
+            landmarkName = "prepare(content:image:onImageDownloaded:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "6E4FE81B-852B-46F5-ACE2-A7A985C43C05 - 4565cdeb8af49076"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Telstra.ItemCell.prepare(content: Swift.Optional&lt;TelstraAPI.Content&gt;, image: Swift.Optional&lt;__C.UIImage&gt;, onImageDownloaded: Swift.Optional&lt;(Swift.Optional&lt;__C.UIImage&gt;) -&gt; ()&gt;) -&gt; __C.UICollectionViewCell"
+                  moduleName = "Telstra"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jaysalvador/Telstra/Telstra/Cells/ItemCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "93"
+                  endingLineNumber = "93"
+                  offsetFromSymbolStart = "1459">
+               </Location>
+               <Location
+                  uuid = "6E4FE81B-852B-46F5-ACE2-A7A985C43C05 - 36b413621dd43f50"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;__C.UIImage&gt;) -&gt; () in Telstra.ItemCell.prepare(content: Swift.Optional&lt;TelstraAPI.Content&gt;, image: Swift.Optional&lt;__C.UIImage&gt;, onImageDownloaded: Swift.Optional&lt;(Swift.Optional&lt;__C.UIImage&gt;) -&gt; ()&gt;) -&gt; __C.UICollectionViewCell"
+                  moduleName = "Telstra"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jaysalvador/Telstra/Telstra/Cells/ItemCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "95"
+                  endingLineNumber = "95"
+                  offsetFromSymbolStart = "93">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4E0E15A2-2A89-4B47-8E32-076F18630CB2"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Telstra/Extensions/UIImageView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "setImage(_:clearCache:indicatorType:onImageDownloaded:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D5336AA6-004C-43AC-9C4C-E7DE523ECECF"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Telstra/Extensions/UIImageView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "setImage(_:clearCache:indicatorType:onImageDownloaded:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
