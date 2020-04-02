@@ -15,3 +15,13 @@ public struct Content: Codable {
     public var imageHref: String?
     
 }
+
+extension Content: Equatable {
+    
+    // add equatable to compare Currency objects
+    
+    public static func == (lhs: Content, rhs: Content) -> Bool {
+        
+        return lhs.title == rhs.title
+    }
+}
