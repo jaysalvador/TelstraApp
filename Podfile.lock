@@ -1,16 +1,19 @@
 PODS:
   - Dwifft (0.9)
-  - Kingfisher (5.13.2):
-    - Kingfisher/Core (= 5.13.2)
-  - Kingfisher/Core (5.13.2)
+  - Kingfisher (5.13.3):
+    - Kingfisher/Core (= 5.13.3)
+  - Kingfisher/Core (5.13.3)
+  - UICollectionViewLeftAlignedLayout (1.0.2)
 
 DEPENDENCIES:
   - Dwifft (from `https://github.com/jflinter/Dwifft.git`, commit `c5a9c62`)
   - Kingfisher
+  - UICollectionViewLeftAlignedLayout
 
 SPEC REPOS:
   trunk:
     - Kingfisher
+    - UICollectionViewLeftAlignedLayout
 
 EXTERNAL SOURCES:
   Dwifft:
@@ -24,8 +27,9 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Dwifft: 00dcec0f3c38cfb9c1331509851e81c84fc3949e
-  Kingfisher: d342c8354c10c3d85a27d6d4c42c41285924b898
+  Kingfisher: d2b3d6a7200c93b34de9afcdf25c8dd9282ec277
+  UICollectionViewLeftAlignedLayout: 830bf6fa5bab9f9b464f62e3384f9d2e00b3c0f6
 
-PODFILE CHECKSUM: 6bd131475d1a7719febf60cabd3c0dc040f4482d
+PODFILE CHECKSUM: 465503b1a86f9736a6f8be0d294eabd1a3887337
 
 COCOAPODS: 1.8.3

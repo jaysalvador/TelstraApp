@@ -46,8 +46,8 @@
             filePath = "Telstra/Cells/ItemCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
             landmarkName = "size(givenWidth:content:)"
             landmarkType = "7">
          </BreakpointContent>
