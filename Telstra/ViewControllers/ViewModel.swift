@@ -19,7 +19,10 @@ protocol ViewModelProtocol {
     var title: String? { get }
     
     var images: [String: UIImage] { get set }
+    
     var contents: [Content]? { get set }
+    
+    var error: HttpError? { get }
     
     // MARK: - Callbacks
     
@@ -43,6 +46,8 @@ class ViewModel: ViewModelProtocol {
     var contents: [Content]?
     
     var images: [String : UIImage]
+    
+    private(set) var error: HttpError?
     
     // MARK: - Callbacks
     
@@ -89,7 +94,9 @@ class ViewModel: ViewModelProtocol {
                 
                 self?.onUpdated?()
                 
-            case .failure:
+            case .failure(let error):
+                
+                self?.error = error
                 
                 self?.onError?()
             }

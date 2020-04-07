@@ -158,6 +158,33 @@ class ViewController: JCollectionViewController<ViewSection, ViewItem>, LayoutDe
                 self?.refreshControl.endRefreshing()
             }
         }
+        
+        self.viewModel?.onError = { [weak self] in
+            
+            DispatchQueue.main.async {
+                
+                let error = self?.viewModel?.error
+                
+                let alert = UIAlertController(title: error?.title, message: error?.errorDescription, preferredStyle: .alert)
+                
+                alert.addAction(
+                    UIAlertAction(
+                        title: "OK",
+                        style: .default,
+                        handler: { _ in
+
+                            self?.title = nil
+                            
+                            self?.updateSectionsAndItems(forced: true)
+                            
+                            self?.refreshControl.endRefreshing()
+                        }
+                    )
+                )
+                
+                self?.present(alert, animated: true, completion: nil)
+            }
+        }
     }
     
     override func setupCollectionView() {
