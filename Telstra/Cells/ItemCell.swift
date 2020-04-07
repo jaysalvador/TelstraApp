@@ -16,10 +16,18 @@ class ItemCell: UICollectionViewCell {
         let label = UILabel()
         
         label.font = .circularBold(ofSize: 20)
-        label.textColor = .black
         label.numberOfLines = 0
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
+        
+        if #available(iOS 13.0, *) {
+            
+            label.textColor = UIColor.systemGray6.inverted
+        }
+        else {
+            
+            label.textColor = .black
+        }
         
         return label
     }()
@@ -29,10 +37,18 @@ class ItemCell: UICollectionViewCell {
         let label = UILabel()
         
         label.font = .circularBook(ofSize: 14)
-        label.textColor = .darkGray
         label.numberOfLines = 0
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
+        
+        if #available(iOS 13.0, *) {
+        
+            label.textColor = UIColor.systemGray3.inverted
+        }
+        else {
+            
+            label.textColor = .darkGray
+        }
         
         return label
     }()
@@ -62,10 +78,21 @@ class ItemCell: UICollectionViewCell {
         self.addSubview(self.descriptionLabel)
         self.addSubview(self.imageView)
         
-        self.backgroundColor = .white
+        if #available(iOS 13.0, *) {
+            
+            self.backgroundColor = .systemGray6
+            
+            self.borderColor = UIColor.systemGray.withAlphaComponent(0.5)
+        }
+        else {
+            
+            self.backgroundColor = .white
+            
+            self.borderColor = UIColor.lightGray.withAlphaComponent(0.5)
+        }
         
         self.cornerRadius = 10.0
-        self.borderColor = UIColor.lightGray.withAlphaComponent(0.5)
+        
         self.borderWidth = 1.0
         
         self.clipsToBounds = true

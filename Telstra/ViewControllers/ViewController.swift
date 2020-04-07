@@ -61,7 +61,14 @@ class ViewController: JCollectionViewController<ViewSection, ViewItem>, LayoutDe
         
         collectionView.delegate = self
         
-        collectionView.backgroundColor = .white
+        if #available(iOS 13.0, *) {
+            
+            collectionView.backgroundColor = .systemGray6
+        }
+        else {
+            
+            collectionView.backgroundColor = .white
+        }
         
         collectionView.clipsToBounds = false
         
@@ -102,7 +109,14 @@ class ViewController: JCollectionViewController<ViewSection, ViewItem>, LayoutDe
         
         self.setupViewModel()
         
-        self.view.backgroundColor = .white
+        if #available(iOS 13.0, *) {
+            
+            self.view.backgroundColor = .systemGray6
+        }
+        else {
+            
+            self.view.backgroundColor = .white
+        }
     }
     
     /// generates the items based on the data given by the `ViewModel` that will be rendered on the `CollectionView`
