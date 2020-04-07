@@ -36,6 +36,8 @@
 		B55CA8FA2435C99700389837 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55CA8F92435C99700389837 /* UIFont.swift */; };
 		B55CA9002435DD2200389837 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55CA8FF2435DD2200389837 /* String.swift */; };
 		B59CB0F1243C97710077E4BE /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59CB0F0243C97710077E4BE /* UIColor.swift */; };
+		B59CB0F6243CA6300077E4BE /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = B59CB0F5243CA6300077E4BE /* data.json */; };
+		B59CB0F8243CA6470077E4BE /* DataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59CB0F7243CA6470077E4BE /* DataHelper.swift */; };
 		C7AD8F2EB46C9B486DC6DF94 /* Pods_Telstra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0C79CA5DA42E19E062070DB /* Pods_Telstra.framework */; };
 		EC2ACD6A18A47CA40DB386FA /* Pods_TelstraTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B217A2E484FEFA0D26C28255 /* Pods_TelstraTests.framework */; };
 /* End PBXBuildFile section */
@@ -110,6 +112,8 @@
 		B55CA8F92435C99700389837 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		B55CA8FF2435DD2200389837 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		B59CB0F0243C97710077E4BE /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		B59CB0F5243CA6300077E4BE /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
+		B59CB0F7243CA6470077E4BE /* DataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHelper.swift; sourceTree = "<group>"; };
 		BB93834D24B0CDA74E2FD215 /* Pods_Telstra_TelstraUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Telstra_TelstraUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0C79CA5DA42E19E062070DB /* Pods_Telstra.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Telstra.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D44AD1F759E981326C77E025 /* Pods-Telstra-TelstraUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Telstra-TelstraUITests.release.xcconfig"; path = "Target Support Files/Pods-Telstra-TelstraUITests/Pods-Telstra-TelstraUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -216,7 +220,9 @@
 		B55CA8A72435A0BE00389837 /* TelstraTests */ = {
 			isa = PBXGroup;
 			children = (
+				B59CB0F7243CA6470077E4BE /* DataHelper.swift */,
 				B55CA8A82435A0BE00389837 /* TelstraTests.swift */,
+				B59CB0F5243CA6300077E4BE /* data.json */,
 				B55CA8AA2435A0BE00389837 /* Info.plist */,
 			);
 			path = TelstraTests;
@@ -463,6 +469,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B59CB0F6243CA6300077E4BE /* data.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -603,6 +610,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B55CA8A92435A0BE00389837 /* TelstraTests.swift in Sources */,
+				B59CB0F8243CA6470077E4BE /* DataHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

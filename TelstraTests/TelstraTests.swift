@@ -8,27 +8,57 @@
 
 import XCTest
 @testable import Telstra
+@testable import TelstraAPI
 
 class TelstraTests: XCTestCase {
 
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+
     }
 
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+
     }
 
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testData() {
+        
+        let feed = getMockFeed()
+        
+        let contents = feed?.rows
+        
+        XCTAssertTrue(contents?[7].isNil == true, "Content must be nil with no title, description, image")
+        
+        XCTAssertEqual(contents?[0].title, "Beavers", "Title must be beavers")
+        
+        XCTAssertNotNil(contents?[0].id, "Id was not generated")
+        
+        XCTAssertEqual(contents?[0], contents?[0], "Equality test failed")
+        
+        XCTAssertNotEqual(contents?[0], contents?[1], "Equality test: Content 0 and 1 must not be equal")
     }
 
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    private func getMockFeed() -> Feed? {
+        
+        let expectation = self.expectation(description: "no data recieved")
+        
+        var feed: Feed?
+                
+        DataHelper.getMockData { (response) in
+            
+            switch response {
+                
+            case .success(let _feed):
+                
+                feed = _feed
+                
+            case .failure:
+                
+                feed = nil
+            }
+            expectation.fulfill()
         }
+        wait(for: [expectation], timeout: 5.0)
+        
+        return feed
     }
-
 }
