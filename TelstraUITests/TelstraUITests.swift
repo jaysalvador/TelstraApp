@@ -23,13 +23,21 @@ class TelstraUITests: XCTestCase {
     }
 
     func testSwiping() {
-                
+        
         self.app.launch()
         
         let identifierToFind = "Language"
         
         var identifier: String? = ""
         
+        let firstCell = self.app.collectionViews.cells.firstMatch
+        
+        let start = firstCell.coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 0))
+        
+        let finish = firstCell.coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 6))
+        
+        start.press(forDuration: 0, thenDragTo: finish)
+                
         let cell = self.app.collectionViews.cells[identifierToFind]
         
         // Swipe down until it is visible
