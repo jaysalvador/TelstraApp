@@ -141,6 +141,8 @@ class ItemCell: UICollectionViewCell {
         
         self.layoutIfNeeded()
         
+        self.accessibilityIdentifier = content?.title
+        
         return self
     }
     
