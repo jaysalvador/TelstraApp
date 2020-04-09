@@ -12,10 +12,13 @@ extension UIColor {
     
     var inverted: UIColor {
         
-        var r: CGFloat = 0.0, g: CGFloat = 0.0, b: CGFloat = 0.0, a: CGFloat = 0.0
+        var red: CGFloat = 0.0
+        var green: CGFloat = 0.0
+        var blue: CGFloat = 0.0
+        var alpha: CGFloat = 0.0
         
-        self.getRed(&r, green: &g, blue: &b, alpha: &a)
+        self.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
         
-        return UIColor(red: (1 - r), green: (1 - g), blue: (1 - b), alpha: a)
+        return UIColor(red: (1 - red), green: (1 - green), blue: (1 - blue), alpha: alpha)
     }
 }

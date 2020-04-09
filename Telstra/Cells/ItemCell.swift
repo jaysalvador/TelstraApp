@@ -219,7 +219,7 @@ class ItemCell: UICollectionViewCell {
         
         NSLayoutConstraint.activate([
             self.titleLabel.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor, constant: 20),
-            self.titleLabel.rightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.rightAnchor, constant: -20),
+            self.titleLabel.rightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.rightAnchor, constant: -20)
         ])
         
         NSLayoutConstraint.activate([
@@ -228,4 +228,3 @@ class ItemCell: UICollectionViewCell {
         ])
     }
 }
-

@@ -149,4 +149,3 @@ public class HttpClient: HttpClientProtocol {
         task.resume()
     }
 }
-

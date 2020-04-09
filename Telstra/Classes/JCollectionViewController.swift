@@ -177,7 +177,6 @@ class JCollectionViewController<Section: Equatable, Item: Equatable>: UIViewCont
         // can be overriden
     }
     
-    
     /// High level implementation for `didSelectItemAtSection` to quickly provide the `Section` and `Item` objects easily
     /// - Parameter collectionView: `CollectionView` class
     /// - Parameter section: the current `Section` object
@@ -215,7 +214,6 @@ class JCollectionViewController<Section: Equatable, Item: Equatable>: UIViewCont
     
     // MARK: - Dwifft convenience
     
-    
     /// gets a particular cell based on the given `Section` and `Item`
     /// - Parameter section: the current `Section` object
     /// - Parameter item: the current `Item` object
@@ -248,7 +246,6 @@ class JCollectionViewController<Section: Equatable, Item: Equatable>: UIViewCont
         }
     }
     
-    
     /// Returns `Section` and `Item`
     /// - Parameter indexPath: given IndexPath
     func sectionAndItem(atIndexPath indexPath: IndexPath) -> (Section, Item)? {
@@ -268,4 +265,3 @@ class JCollectionViewController<Section: Equatable, Item: Equatable>: UIViewCont
     }
     
 }
-

@@ -45,7 +45,7 @@ class ViewModel: ViewModelProtocol {
     
     var contents: [Content]?
     
-    var images: [String : UIImage]
+    var images: [String: UIImage]
     
     private(set) var error: HttpError?
     
@@ -66,7 +66,7 @@ class ViewModel: ViewModelProtocol {
         
         self.client = _client
         
-        self.images = [String : UIImage]()
+        self.images = [String: UIImage]()
     }
     
     // MARK: - Functions

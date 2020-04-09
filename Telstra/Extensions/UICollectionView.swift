@@ -40,4 +40,3 @@ extension UICollectionView {
         return self.collectionViewLayout as? UICollectionViewFlowLayout
     }
 }
-

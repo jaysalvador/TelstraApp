@@ -321,4 +321,3 @@ class ViewController: JCollectionViewController<ViewSection, ViewItem>, LayoutDe
         super.orientationChanged()
     }
 }
-

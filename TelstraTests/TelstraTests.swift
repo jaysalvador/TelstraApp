@@ -54,7 +54,6 @@ class TelstraTests: XCTestCase {
         
         XCTAssertNotEqual(items[0], items[1], "Equality test: Item 0 and 1 must not be equal")
         
-        
         if case .item(let content) = items[0], let firstContent = contents?.first {
 
             XCTAssertEqual(content.title, "Beavers", "Title must be beavers")
