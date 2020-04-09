@@ -4,12 +4,16 @@ Demo App for Telstra
 
 <p align="left">
   <img src="https://github.com/jaysalvador/TelstraApp/blob/master/images/01.png" width="150" height="325" alt="accessibility text">
-
+  
+  <img src="https://github.com/jaysalvador/TelstraApp/blob/master/images/06.jpg" width="150" height="325" alt="accessibility text">
+  <br />
   <img src="https://github.com/jaysalvador/TelstraApp/blob/master/images/03.jpg" width="250" height="325" alt="accessibility text">
   
   <img src="https://github.com/jaysalvador/TelstraApp/blob/master/images/04.jpg" width="400" height="325" alt="accessibility text">
-  
+  <br /> 
   <img src="https://github.com/jaysalvador/TelstraApp/blob/master/images/02.jpg" width="350" alt="accessibility text">
+  
+  <img src="https://github.com/jaysalvador/TelstraApp/blob/master/images/05.jpg" width="350" alt="accessibility text">
 </p>
 
 ## TelstraAPI
